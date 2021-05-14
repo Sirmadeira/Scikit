@@ -21,7 +21,7 @@ clf = svm.SVC(gamma=0.0001, C=100)
 # Isso pega todo o conjunto de dados, tanto do dataset quanto do target, e o seu ultimo elemento
 
 print(len(digits.data))
-# Exemplo de overfit abaixo
+# Exemplo de overfit abaixe o gamma
 x,y = digits.data[:-10], digits.target[:-10]
 clf.fit(x,y)
 # Isso daki seria basicamente a tentativa de interpretar o numero dado nesse caso esto dando o antes do penultimo
