@@ -19,6 +19,7 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
 	#print(stock_list)
 	for each_dir in stock_list[1:]:
 		each_file = os.listdir(each_dir)
+		ticker=each_dir.split("\\")[1]
 		# Isso daki esta listando todos os diretorios da primeira diretoric dentro de statspath, sendo nesse caso o diretorio a de key stats
 		#print(each_file)
 		#time.sleep(15)
@@ -30,9 +31,15 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
 				#print(date_stamp, unix_time)
 				full_file_path= each_dir+'/'+file
 				# Path completo para a file
-				source= open(full_file_path)
+				source= open(full_file_path,'r').read()
 				# Tendo em consideracao que isso e parse em file statica nao a necessidade por url etc,
 				#print(source)
-				value = source.split(gather)
-				time.sleep(15)
+				try:
+					value = source.split(gather+':</td><td class="yfnc_tabledata1">')[1].split('</td>')[0]
+				except Exception as e:
+					value = float('nan')
+				# Try except para evitar codigos ruins ou fontes erradas
+				#Selecionando a parte especifica do source
+				print(ticker+":", value)
+			time.sleep(15)
 Key_Stats()
