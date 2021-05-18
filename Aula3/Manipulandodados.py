@@ -15,6 +15,8 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
 	statspath= path +'/_KeyStats'
 	# Basicamente so pega o nome referenciado na lista  de files
 	stock_list  = [x[0] for x in os.walk(statspath)]
+	df= pd.DataFrame(columns = ['Date','Unix','Ticker','DE Ratio'])
+	# Definindo coluinas da dataframe
 	# Rode o pritnt para entender a lista de diretorios
 	#print(stock_list)
 	for each_dir in stock_list[1:]:
@@ -36,10 +38,16 @@ def Key_Stats(gather="Total Debt/Equity (mrq)"):
 				#print(source)
 				try:
 					value = source.split(gather+':</td><td class="yfnc_tabledata1">')[1].split('</td>')[0]
+					df = df.append({'Date':date_stamp,'Unix':unix_time,'Ticker':ticker,'DE Ratio':value,}, ignore_index = True)
+					# Toda vez que voce adiciona algo a um dicionario voce preciso ignorar o index
 				except Exception as e:
 					value = float('nan')
+			save=gather.replace(' ','').replace(')','').replace('(','').replace('/','')+('.csv')
+			# isso daki retira os dados inutei da pasta
+			print(save)
+			df.to_csv(save)
+			#Issoprinta os csv
 				# Try except para evitar codigos ruins ou fontes erradas
 				#Selecionando a parte especifica do source
-				print(ticker+":", value)
-			time.sleep(15)
+				#print(ticker+":", value) 
 Key_Stats()
