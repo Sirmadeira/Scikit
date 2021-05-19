@@ -36,7 +36,7 @@ a = -w[0] / w[1]
 xx = np.linspace(0,12)
 yy = a * xx - clf.intercept_[0] / w[1]
 # Todas essa mecanicas sao necessaria para visualizar graficos, elas geralmente nao sao utilizadas com modelos svc, 
-#pq elas tem excesso de features.
+#pq elas tem excesso de features e logo muitas dimensoes.
 # plot do coeficiente
 h0 = plt.plot(xx, yy, 'k-', label="non weighted div")
 
