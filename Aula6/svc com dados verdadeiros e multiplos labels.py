@@ -48,6 +48,8 @@ def Build_Data_Set():
     data_df = pd.read_csv("key_stats.csv")
 
     #data_df = data_df[:100]
+    data_df = data_df.reindex(np.random.permutation(data_df.index))
+    #Randomizador
 
     X = np.array(data_df[FEATURES].values)#.tolist())
 
@@ -79,4 +81,14 @@ def Analysis():
             correct_count+=1
     print("Precisao:", (correct_count/test_size) * 100.00)
 
+# def Randomizing():
+#     df = pd.DataFrame({"D1":range(5), "D2":range(5)})
+#     print(df)
+#     df2 = df.reindex(np.random.permutation(df.index))
+#     print(df2)
+
+
+# Randomizing()
+
+# Se randomiza os dados para nao seguir o padrao comum de pasta, testando multiplas precisoes
 Analysis()
